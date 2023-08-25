@@ -1,0 +1,4 @@
+GitRepositoriesView.GitDirectories=D\:\\SpringWorkspace\\SpringSecurity\\spring-boot-3-jwt-security_amigos\\.git;D\:\\SpringWorkspace\\SpringSecurity_Practice\\.git;D\:\\SpringWorkspace\\spring-security-login-system\\.git;
+GitRepositoriesView.GitDirectories.relative=SpringSecurity\\spring-boot-3-jwt-security_amigos\\.git;SpringSecurity_Practice\\.git;spring-security-login-system\\.git;
+core_autoIgnoreDerivedResources=false
+eclipse.preferences.version=1

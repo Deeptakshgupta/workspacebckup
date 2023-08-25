@@ -1,0 +1,14 @@
+package com.test.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Person {
+
+	@Id
+	private String personId;
+	private String personName;
+	private String personCity;
+	
+}

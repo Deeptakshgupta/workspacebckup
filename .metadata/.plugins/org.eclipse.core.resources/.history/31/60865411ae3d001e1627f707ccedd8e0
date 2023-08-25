@@ -1,0 +1,12 @@
+package com.pcp.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.pcp.model.UserDetails;
+
+public interface UserRepository extends JpaRepository<UserDetails, String> {
+
+	public Optional<UserDetails> findByUsername(String username);
+}

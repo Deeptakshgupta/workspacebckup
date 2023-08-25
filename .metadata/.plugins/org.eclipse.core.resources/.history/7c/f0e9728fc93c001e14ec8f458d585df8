@@ -1,0 +1,16 @@
+package com.authentication.services;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+
+@Service
+@RequiredArgsConstructor
+public class TokenService {
+
+	private JwtEncoder jwtEncoder;
+	private JwtDecoder jwtDEcoder;
+}

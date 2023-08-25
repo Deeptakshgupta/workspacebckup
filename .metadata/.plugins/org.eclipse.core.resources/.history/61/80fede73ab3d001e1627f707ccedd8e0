@@ -1,0 +1,18 @@
+package com.pcp.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
+
+import com.pcp.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserService implements UserDetailsService {
+
+	private final UserRepository userRepository;
+	
+	
+}

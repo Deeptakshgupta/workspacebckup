@@ -1,0 +1,11 @@
+
+server.port = 9091
+
+spring.datasource.url=
+spring.datasource.usernmae = root
+spring.datasource.password = root
+
+
+spring.jpa.show-sql = true
+spring.jpa.hibernate.ddl-auto = update
+spring.jpa.properties.hibernate.format_sql = true

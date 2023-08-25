@@ -1,0 +1,22 @@
+package com.test.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import com.test.model.Person;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+class PersonRepositoryTest {
+
+	private PersonRepository personRepository;
+	@Test
+	void testIsPersonExistsById() {
+		
+		
+	boolean test = personRepository.isPersonExistsById(1);
+	}
+
+}

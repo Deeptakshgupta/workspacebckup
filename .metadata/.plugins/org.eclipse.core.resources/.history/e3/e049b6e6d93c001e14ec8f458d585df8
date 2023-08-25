@@ -1,0 +1,58 @@
+package com.authentication.config;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+import com.authentication.model.ApplicationUser;
+import com.authentication.model.Role;
+import com.authentication.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@RequiredArgsConstructor
+public class SecurityConfig {
+	
+	private final UserRepository userRepository;
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
+	{
+
+		return http.
+				authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+				.httpBasic().and()
+				.build();
+	}
+
+	
+//	  @Bean 
+//	  public UserDetailsService userDetailsService() { 	  
+//	  Set<Role> roles = new HashSet<>();
+//	 var uds = new InMemoryUserDetailsManager();
+//	 uds.createUser(User.builder()
+//			 .username("Pulkit")
+//			 .password("12345")
+//			 .authorities("read")
+//			 .build());
+//	  return uds;
+//	 }
+	 
+	@Bean
+	public PasswordEncoder passwordEncoder()
+	{
+	return 	NoOpPasswordEncoder.getInstance();
+	
+	}
+}

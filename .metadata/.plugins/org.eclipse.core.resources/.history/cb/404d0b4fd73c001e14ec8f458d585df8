@@ -1,0 +1,59 @@
+package com.authentication.services;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.authentication.dto.LoginResponseDTO;
+import com.authentication.model.ApplicationUser;
+import com.authentication.model.Role;
+import com.authentication.repository.RoleRepository;
+import com.authentication.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class AuthenticationService {
+
+	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
+	private final PasswordEncoder pswdEncoder;
+	@Autowired
+	private final AuthenticationManager authenticationManager;
+	private TokenService tokenService;
+	
+	public ApplicationUser registerUser(String username, String password)
+	{
+		String encodedPassword = pswdEncoder.encode(password);
+		
+		Role userRole = roleRepository.findByAuthority("USER").get();// get if value is not null then return the value, otherwise throw NoSuchElementFoundException 
+		
+		Set<Role> authorities = new HashSet<>();
+		authorities.add(userRole);
+		return userRepository.save(new ApplicationUser(username,encodedPassword,authorities));
+	}
+	 
+	public LoginResponseDTO loginUser(String username, String password)
+	{
+		try {
+			Authentication auth  = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(username, password));
+			String token = tokenService.generateJwt(auth);
+			
+			return new LoginResponseDTO(userRepository.findByUsername(username).get(), token);
+		}
+		catch (AuthenticationException e) {
+			// TODO: handle exception
+			return new LoginResponseDTO(null, "");
+		}
+	}
+	
+}

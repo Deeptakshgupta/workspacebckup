@@ -1,0 +1,23 @@
+package com.example.demo.student;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+class StudentRepositoryTest {
+
+	@Autowired
+	private StudentRepository studentRepository;
+	
+	@Test
+	void checkExistsEmail()
+	{
+		String email ="email@gmail.com"; 
+		//given
+		Student student = new Student("name", email,Gender.MALE);
+		//when
+		//then
+	}
+
+}

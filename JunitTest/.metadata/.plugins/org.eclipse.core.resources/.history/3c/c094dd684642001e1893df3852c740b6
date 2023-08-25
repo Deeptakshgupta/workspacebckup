@@ -1,0 +1,14 @@
+package com.example.demo.student;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class StudentRepositoryTest {
+
+	@Test
+	void testSelectExistsEmail() {
+		fail("Not yet implemented");
+	}
+
+}

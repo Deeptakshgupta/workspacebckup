@@ -1,0 +1,26 @@
+package com.test.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.test.repository.PersonRepository;
+
+@ExtendWith(MockitoExtension.class)
+class PersonServiceTest {
+
+	// need to create a ,mock for repo as we don't it to be tested with actual data
+	@Mock
+	private PersonRepository personRepository;
+	
+	
+	
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

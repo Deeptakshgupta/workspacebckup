@@ -1,0 +1,19 @@
+package com.pcp.model;
+
+import java.io.Serializable;
+
+import org.springframework.security.core.userdetails.User;
+
+
+
+public class UserHelper extends User implements Serializable{
+
+	public UserHelper(UserDetails user)
+	{
+	super(
+			user.getUsername(),
+			user.getPassword(),
+			user.getListOfGrantedAuthorities()
+			);
+	}
+}

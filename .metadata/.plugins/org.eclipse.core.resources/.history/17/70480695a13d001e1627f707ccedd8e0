@@ -1,0 +1,5 @@
+package com.pcp.repository;
+
+public class UserRepository {
+
+}

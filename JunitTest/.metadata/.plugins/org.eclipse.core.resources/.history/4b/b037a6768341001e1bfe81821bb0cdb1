@@ -1,0 +1,26 @@
+package com.test.repository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.test.model.Person;
+
+import lombok.RequiredArgsConstructor;
+
+@SpringBootTest
+@RequiredArgsConstructor
+class PersonRepositoryTest {
+
+	private PersonRepository personRepository;
+	@Test
+	void testIsPersonExistsById() {
+		
+		
+	boolean test = personRepository.isPersonExistsById(1);
+	assertThat(test).isTrue();
+	}
+
+}
