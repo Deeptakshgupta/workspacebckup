@@ -1,4 +1,4 @@
-GitRepositoriesView.GitDirectories=D\:\\SpringWorkspace\\JunitTest\\spring-boot-fullstack-professional\\.git;
-GitRepositoriesView.GitDirectories.relative=spring-boot-fullstack-professional\\.git;
+GitRepositoriesView.GitDirectories=D\:\\SpringWorkspace\\JunitTest\\spring-boot-fullstack-professional\\.git;D\:\\SpringWorkspace\\.git;
+GitRepositoriesView.GitDirectories.relative=spring-boot-fullstack-professional\\.git;D\:\\SpringWorkspace\\.git;
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

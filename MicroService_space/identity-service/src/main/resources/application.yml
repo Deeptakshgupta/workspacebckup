@@ -1,0 +1,21 @@
+
+spring:
+  application:
+    name: IDENTITY-SERVICE
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3400/microservices?allowPublicKeyRetrieval=true&useSSL=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+    show-sql: true
+   
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      
+server:
+  port: 9090
