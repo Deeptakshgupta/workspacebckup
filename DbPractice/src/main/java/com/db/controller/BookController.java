@@ -3,6 +3,7 @@ package com.db.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,13 @@ public class BookController {
 	    public ResponseEntity<List<Book>> getAllBooks() {
 		 
 		 List<Book> books = bookService.getAllBooks();
-	        return new ResponseEntity<>(books, HttpStatus.OK);
+	     
+		 return ResponseEntity.status(HttpStatus.OK).body(books);
+		 
+		 
+//		 return new ResponseEntity<>(books, HttpStatus.OK);
+	        
+	        
 	    }
 
 	    @GetMapping("/{id}")
