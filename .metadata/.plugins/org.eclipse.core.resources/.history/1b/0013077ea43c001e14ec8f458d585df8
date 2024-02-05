@@ -1,5 +1,0 @@
-package com.authentication.repository;
-
-public class RoleRepository {
-
-}

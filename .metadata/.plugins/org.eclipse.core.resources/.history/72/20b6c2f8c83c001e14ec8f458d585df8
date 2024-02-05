@@ -1,5 +1,0 @@
-package com.authentication.services;
-
-public class TokenService {
-
-}
