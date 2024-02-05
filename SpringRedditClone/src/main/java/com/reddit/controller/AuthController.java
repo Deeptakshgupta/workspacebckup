@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reddit.dto.AuthenticationResponse;
+import com.reddit.dto.LoginRequest;
+import com.reddit.dto.RefreshTokenRequest;
+import com.reddit.dto.RegisterRequest;
+import com.reddit.service.AuthService;
+import com.reddit.service.RefreshTokenService;
+
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -17,7 +24,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthController {
 
-	private final AuthService authservice;
+	private final AuthService authService;
 	private final RefreshTokenService refreshTokenService;
 	
 	
@@ -33,7 +40,7 @@ public class AuthController {
 	   public ResponseEntity<String> verifyAccount (@PathVariable String token)
 	   {
 		   authService.verifyAccount(token);
-	        return new ResponseEntity<>("Account Activated Successfully", OK);
+	        return new ResponseEntity<>("Account Activated Successfully", HttpStatus.OK);
 	   }
 	
 	   @PostMapping("/login")

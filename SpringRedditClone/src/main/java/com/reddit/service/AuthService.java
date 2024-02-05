@@ -2,6 +2,7 @@ package com.reddit.service;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +24,7 @@ import com.reddit.model.User;
 import com.reddit.model.VerificationToken;
 import com.reddit.repository.UserRepository;
 import com.reddit.repository.VerificationTokenRepository;
+import com.reddit.security.JwtProvider;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -115,6 +117,6 @@ public class AuthService {
 	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	        return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
 	    }
-	}
+	
 	 
 }
