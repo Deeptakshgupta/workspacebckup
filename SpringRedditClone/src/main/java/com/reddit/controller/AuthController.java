@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,6 @@ import com.reddit.dto.RegisterRequest;
 import com.reddit.service.AuthService;
 import com.reddit.service.RefreshTokenService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -28,13 +28,13 @@ public class AuthController {
 	private final RefreshTokenService refreshTokenService;
 	
 	
-	@PostMapping("/signup")
-	public ResponseEntity<String> signup(@RequestBody RegisterRequest regsiterRequest)
-	{
-		authService.signup(regsiterRequest);
-		 return new ResponseEntity<>("User Registration Successful",
+	  @PostMapping("/signup")
+	    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
+		  System.out.println(registerRequest);
+	        authService.signup(registerRequest);
+	        return new ResponseEntity<>("User Registration Successful",
 	                HttpStatus.OK);
-	}
+	    }
 	
 	   @GetMapping("accountVerification/{token}")
 	   public ResponseEntity<String> verifyAccount (@PathVariable String token)

@@ -26,68 +26,84 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.security.PublicKey;
+import java.security.KeyFactory;
+
+import java.util.Base64;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${jwt.public.key}")
-    RSAPublicKey publicKey;
-
-    @Value("${jwt.private.key}")
-    RSAPrivateKey privateKey;
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.cors().and()
-                .csrf().disable()
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/**")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/subreddit")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/posts/")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/posts/**")
-                        .permitAll()
-                        .requestMatchers("/v2/api-docs",
-                                "/configuration/ui",
-                                "/swagger-resources/**",
-                                "/configuration/security",
-                                "/swagger-ui.html",
-                                "/webjars/**")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
-                ).build();
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.publicKey).build();
-    }
-
-    @Bean
-    JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.publicKey).privateKey(this.privateKey).build();
-        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
-    }
+//    @Value("${jwt.public.key}")
+//    RSAPublicKey publicKey;
+//
+//    @Value("${jwt.private.key}")
+//    RSAPrivateKey privateKey;
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        return httpSecurity.cors().and()
+//                .csrf().disable()
+//                .authorizeHttpRequests(authorize -> authorize
+//                        .requestMatchers("/api/auth/**")
+//                        .permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/subreddit")
+//                        .permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/posts/")
+//                        .permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/posts/**")
+//                        .permitAll()
+//                        .requestMatchers("/v2/api-docs",
+//                                "/configuration/ui",
+//                                "/swagger-resources/**",
+//                                "/configuration/security",
+//                                "/swagger-ui.html",
+//                                "/webjars/**")
+//                        .permitAll()
+//                        .anyRequest()
+//                        .authenticated())
+//                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .exceptionHandling(exceptions -> exceptions
+//                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
+//                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
+//                ).build();
+//    }
+//
+//    @Bean
+//    PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    JwtDecoder jwtDecoder() throws Exception {
+////    	RSAPublicKey publicKey_local = loadPublicKey();
+//        return NimbusJwtDecoder.withPublicKey(this.publicKey).build();
+//    }
+//
+//    @Bean
+//    JwtEncoder jwtEncoder() {
+//    	
+//        JWK jwk = new RSAKey.Builder(this.publicKey).privateKey(this.privateKey).build();
+//        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+//        return new NimbusJwtEncoder(jwks);
+//    }
+//    
+////    private RSAPublicKey loadPublicKey() throws Exception {
+////        byte[] keyBytes = Files.readAllBytes(Paths.get("app.pub"));
+////        X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+////        KeyFactory kf = KeyFactory.getInstance("RSA");
+////        return (RSAPublicKey) kf.generatePublic(spec);
+////    }
 }
