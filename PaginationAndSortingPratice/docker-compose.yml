@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    image: pagiantion-api
+    ports:
+      - 9090:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlDb:3306/paginationDb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysqlDb
+
+  mysqlDb:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: paginationDb
